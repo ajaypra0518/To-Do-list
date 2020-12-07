@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <input type="text" id="textbox">
+    <button id="btn"> Submit</button>
+    <div>
+        <h3>TO DO</h3>
+        <div id="insertdata"></div>
+    </div>
+    <div>
+        <h3>Completed Task</h3>
+       
+    </div>
+</body>
+
+<script>
+     var x,x1,x2,button1,button2,i=0,a=[];
+    $(document).ready(function(){
+       
+        $('#btn').click(function(){
+             a[i]=$('#textbox').val()
+             x1=`<input type="checkbox" id="vehicle${i}" >`
+             x2= `<input type="text" id="textbox${i}">`
+             button1=`<button id="edit${i}" onclick="myfun(this.id)"> EDIT</button>`
+             button2=`<button id="delete${i}" onclick="myfun1(this.id)"> DELETE</button>`    
+        $('#insertdata').append(`<div id=div${i}>`+x1+`<span id="con${i}">`+a[i]+`</span>`+x2+button1+button2+`</div>`);
+        i++;  
+
+    //     $().click(function(){
+    //       $('#textbox2').val(x)
+    //   });
+    });
+   
+    });
+
+    function myfun(idd){
+    var x=document.getElementById(idd).innerText;
+    var cutid=idd.slice(-1)
+    if(x=="EDIT"){
+    console.log('textbox'+cutid)
+    console.log(a[cutid]);
+    document.getElementById('textbox'+cutid).value=a[cutid];
+    document.getElementById('edit'+cutid).innerText="SAVE";
+    }
+    else if(x=="SAVE"){
+        a[cutid]= document.getElementById('textbox'+cutid).value
+        document.getElementById('con'+cutid).innerText=a[cutid];
+        document.getElementById('edit'+cutid).innerText="EDIT";
+    }
+
+    }
+
+    function myfun1(idd){
+    var cutid=idd.slice(-1)
+    console.log('div'+cutid)
+    console.log(a[cutid]);
+    document.getElementById('div'+cutid).style.display="none"
+    }
+</script>
+</html>
