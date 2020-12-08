@@ -1,66 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .main{
+            text-align: center;
+            background-color: #429890;
+            padding: 30px 0;
+          
+        }
+        .textbtn{
+            text-align: center;
+        }
+        .textbtn input,.refeild{
+         width: 25%;
+         height: 30px;
+         font-size: 20px;
+         margin-top: 5px;
+          
+        }
+        .textbtn button{
+            padding: 8px 25px;
+            margin-top: 30px;
+            font-size: 17px;
+        }
+        .todo h1,.comptask h1{
+            margin-top: 30px; 
+            text-align: center;
+            margin-bottom: 10px;
+        }
+      .btndeco{
+          padding: 7px 9px;
+          margin-left: 5px;
+      }
+      .spandeco{
+        font-size: 25px;
+      }
+       
+    </style>
 </head>
+
 <body>
+    <div class="main">
+        <h1>TO DO LIST MANAGEMENT</h1>
+    </div>
+
+  <div class="textbtn">
     <input type="text" id="textbox">
     <button id="btn"> Submit</button>
-    <div>
-        <h3>TO DO</h3>
-        <div id="insertdata"></div>
+  </div>
+
+   <div >
+    <div class="todo">
+        <h1>TO DO</h1>
+        <div id="insertdata" style="margin-left: 37%;"></div>
     </div>
-    <div>
-        <h3>Completed Task</h3>
-       
+    <div class="comptask">
+        <h1>Completed Task</h1>
+        <div id="movedata"  style="margin-left: 37%;"></div>
     </div>
+   </div>
 </body>
 
 <script>
-     var x,x1,x2,button1,button2,i=0,a=[];
-    $(document).ready(function(){
-       
-        $('#btn').click(function(){
-             a[i]=$('#textbox').val()
-             x1=`<input type="checkbox" id="vehicle${i}" >`
-             x2= `<input type="text" id="textbox${i}">`
-             button1=`<button id="edit${i}" onclick="myfun(this.id)"> EDIT</button>`
-             button2=`<button id="delete${i}" onclick="myfun1(this.id)"> DELETE</button>`    
-        $('#insertdata').append(`<div id=div${i}>`+x1+`<span id="con${i}">`+a[i]+`</span>`+x2+button1+button2+`</div>`);
-        i++;  
+    var x, x1, x2, button1, button2, i = 0, a = [];
+    $(document).ready(function () {
 
-    //     $().click(function(){
-    //       $('#textbox2').val(x)
-    //   });
-    });
-   
+        $('#btn').click(function () {
+            a[i] = $('#textbox').val()
+            x1 = `<input type="checkbox" id="check${i}" onchange="mycheck(this.id)">`
+            x2 = `<input type="text" id="textbox${i}" class="refeild">`
+            button1 = `<button id="edit${i}" onclick="myfun(this.id)" class="btndeco"> EDIT</button>`
+            button2 = `<button id="delete${i}" onclick="myfun1(this.id)" class="btndeco"> DELETE</button>`
+            $('#insertdata').append(`<div id=div${i}>` + x1 + `<span id="con${i}" class="spandeco">` + a[i] + `</span>`+'<br>' + x2 + button1 + button2 + `</div>`);
+            i++;
+
+        });
+
+
     });
 
-    function myfun(idd){
-    var x=document.getElementById(idd).innerText;
-    var cutid=idd.slice(-1)
-    if(x=="EDIT"){
-    console.log('textbox'+cutid)
-    console.log(a[cutid]);
-    document.getElementById('textbox'+cutid).value=a[cutid];
-    document.getElementById('edit'+cutid).innerText="SAVE";
-    }
-    else if(x=="SAVE"){
-        a[cutid]= document.getElementById('textbox'+cutid).value
-        document.getElementById('con'+cutid).innerText=a[cutid];
-        document.getElementById('edit'+cutid).innerText="EDIT";
-    }
+    function myfun(idd) {// function for edit
+        var x = document.getElementById(idd).innerText;
+        // var x1=$('#'+idd).text();
+        // x1=x1.trim(x1)
+
+        var cutid = idd.slice(-1)
+        if (x === "EDIT") {
+            console.log("yes")
+            $('#textbox' + cutid).val(a[cutid])
+            $('#edit' + cutid).text("SAVE")
+        }
+        else if (x == "SAVE") { 
+            a[cutid] = $('#textbox' + cutid).val();
+            $('#con' + cutid).text(a[cutid]);
+            $('#edit' + cutid).text("EDIT")
+            $('#textbox' + cutid).val("")
+        }
 
     }
 
-    function myfun1(idd){
-    var cutid=idd.slice(-1)
-    console.log('div'+cutid)
-    console.log(a[cutid]);
-    document.getElementById('div'+cutid).style.display="none"
+    function myfun1(idd) { // function for delete
+        var cutid = idd.slice(-1)
+        console.log('div' + cutid)
+        console.log(a[cutid]);
+        $('#div' + cutid).remove();
+    }
+
+    function mycheck(checkid) {
+        var cutid = checkid.slice(-1)
+        if ($('#check' + cutid).is(":checked")) {
+            console.log("Checkbox is checked.");
+            var myDiv1Para = $('#div' + cutid).remove();
+            console.log(myDiv1Para)
+            myDiv1Para.appendTo('#movedata');
+        }
+        else {
+            var myDiv1Para = $('#div' + cutid).remove();
+            myDiv1Para.appendTo('#insertdata');
+        }
     }
 </script>
+
 </html>
