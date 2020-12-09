@@ -103,14 +103,14 @@
                 if (x == "EDIT") {
                     $('#textbox' + cutid).val(a[cutid]);
                     $('#edit' + cutid).text("SAVE");
-                    $('#textbox' + cutid).prop('readonly',false);
+                    $('#textbox' + cutid).attr('readonly',false); // $('#textbox' + cutid).prop('readonly',false);
                 }
                 else if (x == "SAVE") {
                     a[cutid] = $('#textbox' + cutid).val();
                     $('#con' + cutid).text(a[cutid]);
                     $('#edit' + cutid).text("EDIT");
                     $('#textbox' + cutid).val("");
-                    $('#textbox' + cutid).prop('readonly',true);
+                    $('#textbox' + cutid).attr('readonly',true); // $('#textbox' + cutid).prop('readonly',true);
                 }
             });
 
