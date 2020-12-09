@@ -98,7 +98,8 @@
                 var idd = this.id;               /////     $('.edit1').unwind().click(function ()
                 var x = $('#' + idd).text();
                 x = x.trim(x);
-                var cutid = idd.slice(-1);
+                var cutid = idd.substring(4)
+                console.log(cutid)
                 if (x == "EDIT") {
                     $('#textbox' + cutid).val(a[cutid]);
                     $('#edit' + cutid).text("SAVE");
@@ -116,14 +117,14 @@
 
             $('.delbtn').off().click(function () {
                 var idd = this.id;
-                var cutid = idd.slice(-1)
+                var cutid = idd.substring(6)
                 $('#div' + cutid).remove();
 
             });
 
             $('.boxcheck').off().click(function () {
                 var checkid=this.id;
-                var cutid = checkid.slice(-1)
+                var cutid = idd.substring(5)
                 if ($('#check' + cutid).is(":checked")) {
                     var myDiv1Para = $('#div' + cutid);
                     myDiv1Para.appendTo('#movedata');
