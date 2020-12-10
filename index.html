@@ -128,10 +128,15 @@
                 if ($('#check' + cutid).is(":checked")) {
                     var myDiv1Para = $('#div' + cutid);
                     myDiv1Para.appendTo('#movedata');
+                    $('#textbox' + cutid).val("")
+                    $('#edit' + cutid).text("EDIT");
                 }
                 else {
                     var myDiv1Para = $('#div' + cutid);
                     myDiv1Para.appendTo('#insertdata');
+                    $('#textbox' + cutid).val("")
+                    $('#edit' + cutid).text("EDIT");
+
                 }
             });
         });
