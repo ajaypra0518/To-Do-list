@@ -124,7 +124,7 @@
 
             $('.boxcheck').off().click(function () {
                 var checkid=this.id;
-                var cutid = idd.substring(5)
+                var cutid = checkid.substring(5)
                 if ($('#check' + cutid).is(":checked")) {
                     var myDiv1Para = $('#div' + cutid);
                     myDiv1Para.appendTo('#movedata');
